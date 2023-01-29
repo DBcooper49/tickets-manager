@@ -1,0 +1,43 @@
+#a-logo{
+    width : 15%;
+}
+#logo{
+    width : 100%;
+}
+.navbar{
+    background-color: #FAEE83;
+}
+.navbar-links{
+    width: 80%;
+    display: flex;
+    justify-content: flex-end;
+
+
+}
+.navbar-links li{
+    margin-right: 1em;
+    list-style-type: none;
+    font-size: 2em;
+}
+footer{
+    text-align: center;
+    position:absolute;
+    bottom:0;
+    width: 100%;
+    background-color: #FAEE83;
+    color: #000000;
+    font-weight: bold;
+}
+body{
+    background-color: #A6BFBF!important;
+    height: 100%;
+    width: 100%;
+}
+.welcome{
+    height: 100%;
+    text-align: center;
+    margin-top: 8em;
+}
+footer p{
+    margin-top: 1em;
+}
