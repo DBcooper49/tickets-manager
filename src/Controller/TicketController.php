@@ -12,6 +12,7 @@ use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class TicketController extends AbstractController
@@ -83,18 +84,18 @@ class TicketController extends AbstractController
     }
 
     #[Route('/ticket/assignment/{id}/{idUser}', name: 'app_ticket_assignment', methods: ['GET'])]
-    public function assignToUser(ManagerRegistry $doctrine, Request $request, Ticket $ticket, User $user): Response
+    public function assignToUser(int $id, int $idUser, ManagerRegistry $doctrine, Request $request): Response
     {
-        $userId = $user->getId();
         $manager = $doctrine->getManager();
 
-        if ($request->isXmlHttpRequest()) {
-            $ticket->setAssignedTo($userId);
-            $manager->persist($ticket);
-            $manager->flush();
+        $user = $doctrine->getRepository(User::class)->find($idUser);
+        $ticket = $doctrine->getRepository(Ticket::class)->find($id);
 
-            return $this->redirectToRoute('app_tickets');
-        }
-        return $this->redirectToRoute('app_tickets');
+        $ticket->setAssignedTo($user);
+        $manager->persist($ticket);
+        $manager->flush();
+
+        return new JsonResponse(['status' => 'success', 'user' => $user->getFirstName()]);
+        // return $this->redirectToRoute('app_tickets');
     }
 }

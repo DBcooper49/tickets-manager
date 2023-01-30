@@ -1,30 +1,25 @@
-/*window.addEventListener('load', function(){
-    var selectUser = document.getElementsByClassName('.select-user');
-    for (var i = 0; i < selectUser.length; i++){
-        selectUser[i].addEventListener('change', ()=>{
-            let ticketId = selectUser.getAttribute('data-id');
-            // alert(ticketId);
-            let userId = selectUser.value;
-            // alert(userId);
+window.addEventListener('load', function(){
+    [...document.querySelectorAll('.select-user')].forEach(function(button) {
+        button.addEventListener('change', ()=>{
+            let ticketId = button.getAttribute('data-id');
+            let userId = button.value;
 
             url = addUserRoute.replaceAll(':id', ticketId)
             .replaceAll(':userId', userId);
 
-            // alert(url);
+            console.log(url);
             let requete = new XMLHttpRequest();
             requete.open('GET', url);
 
-            requete.responseType = 'text';
-            requete.send();
-
-            requete.onload = function() {
-                if (requete.readyState === XMLHttpRequest.DONE){
-                    if(requete.status === 200){
-                        console.log("ok");
-                    }
+            requete.onreadystatechange = function() {
+                if (requete.readyState === XMLHttpRequest.DONE && requete.status === 200) {
+                    let response = JSON.parse(requete.responseText);
+                    console.log(response);
+                    let assignDiv = document.querySelector('.col-assigned-to-' + ticketId);
+                    assignDiv.innerHTML = response['user'];
                 }
-            }
+            };
+            requete.send();
         });
-    }
+    });
 });
-*/
