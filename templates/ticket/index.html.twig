@@ -1,0 +1,71 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Tickets
+{% endblock %}
+
+{% block body %}
+	<main>
+		<div class="main-top d-flex justify-content-between">
+			<h3>Tickets</h3>
+			<a class="btn add-new" href="{{path('app_ticket_add')}}">Nouveau ticket</a>
+		</div>
+		{% for message in app.flashes('success') %}
+			<div class="alert alert-success">
+				{{ message }}
+			</div>
+		{% endfor %}
+		<div class="row content d-flex justify-content-around">
+			<div class="col-1 col-id">Id</div>
+			<div class="col-2 col-name">Nom</div>
+			<div class="col-1 col-status">Statut</div>
+			<div class="col-1 col-priority">Priorité</div>
+			<div class="col-2 col-assigned-to">Assigné à</div>
+			<div class="col-1 col-created-at">Créé le</div>
+			<div class="col-2 col-actions">Actions</div>
+		</div>
+		{% for ticket in tickets %}
+			<div class="row ticket-row d-flex justify-content-around">
+				<div class="col-1 col-id">{{ ticket.id }}</div>
+				<div class="col-2 col-name" title="{{ ticket.description }}" alt="{{ ticket.description }}">{{ ticket.name }}</div>
+				<div class="col-1 col-status">{{ ticket.status }}</div>
+				<div class="col-1 col-priority">
+					{% if ticket.priority == 1 %}
+						critique
+					{% elseif ticket.priority == 2 %}
+						haute
+					{% else %}
+						normal
+					{% endif %}
+				</div>
+				<div class="col-2 col-assigned-to">
+					{% if ticket.getAssignedTo.firstname is defined %}
+						{{ ticket.getAssignedTo.firstname }}
+					{% else %}
+						<select class="form-select select-user" data-id="{{ticket.id}}" aria-label="Default select example">
+							<option selected>non assigné</option>
+							{% for user in users %}
+								<option value={{ user.id }}>{{ user.firstname }}</option>
+							{%  endfor %}
+						</select>
+					{% endif %}
+				</div>
+				<div class="col-1 col-created-at">{{ ticket.getCreatedAt|date('d/m/Y') }}</div>
+				<div class="col-2 col-actions">
+					<a class="show-btn" href="#">
+						<i class="fa-solid fa-eye"></i>
+					</a>
+					<a class="edit-btn" href="{{path('app_ticket_edit', {'id': ticket.id } )}}">
+						<i class="fa-solid fa-file-pen"></i>
+					</a>
+					<a class="delete-btn" href="{{path('app_ticket_delete', {'id': ticket.id } )}}">
+						<i class="fa-solid fa-trash"></i>
+					</a>
+				</div>
+			</div>
+			<hr>
+		{% endfor %}
+	</main>
+	<script>
+		var addUserRoute = "{{ path('app_ticket_assignment', {'id': ':id', 'idUser': ':userId'}) }}";
+	</script>
+{% endblock %}

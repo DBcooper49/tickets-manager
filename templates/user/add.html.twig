@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+	<main>
+		<div class="main-top d-flex justify-content-between">
+			<h3>Nouvel utilisateur</h3>
+			<a class="btn back-btn" href="{{path('app_users')}}">
+				<i class="fa-solid fa-arrow-rotate-left"></i>Revenir sur la liste des utilisateurs</a>
+		</div>
+		<div class="user-form d-flex justify-content-center m-auto">
+			{{ form_start(form) }}
+
+			<div class="form-group">
+				{{ form_label(form.firstname) }}
+				{{ form_widget(form.firstname) }}
+				{{ form_errors(form.firstname) }}
+			</div>
+			<div class="form-group">
+				{{ form_label(form.lastname) }}
+				{{ form_widget(form.lastname) }}
+				{{ form_errors(form.lastname) }}
+			</div>
+			<div class="form-group">
+				{{ form_label(form.email) }}
+				{{ form_widget(form.email) }}
+				{{ form_errors(form.email) }}
+			</div>
+			<div class="form-group">
+				{{ form_label(form.address) }}
+				{{ form_widget(form.address) }}
+				{{ form_errors(form.address) }}
+			</div>
+			<div class="form-group">
+				{{ form_label(form.phone) }}
+				{{ form_widget(form.phone) }}
+				{{ form_errors(form.phone) }}
+			</div>
+			<div class="form-group">
+				{{ form_row(form.Valider) }}
+			</div>
+		</div>
+		{{ form_end(form) }}
+	</div>
+</main>{% endblock %}

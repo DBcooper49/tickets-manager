@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Utilisateurs
+{% endblock %}
+
+{% block body %}
+	<main>
+		<div class="main-top d-flex justify-content-between">
+			<h3>Utilisateurs</h3>
+			<a class="btn add-new" href="{{path('app_user_add')}}">Nouvel utilisateur</a>
+		</div>
+		<div class="row content d-flex justify-content-around">
+			<div class="col-1 col-firstname">Prénom</div>
+			<div class="col-1 col-lastname">Nom</div>
+			<div class="col-2 col-mail">Email</div>
+			<div class="col-2 col-address">Adresse</div>
+			<div class="col-1 col-tel">Téléphone</div>
+			<div class="col-2 col-actions">Actions</div>
+		</div>
+		{% for user in users %}
+			<div class="row ticket-row d-flex justify-content-around">
+				<div class="col-1 col-firstname">{{ user.firstname }}</div>
+				<div class="col-1 col-lastname">{{ user.lastname }}</div>
+				<div class="col-2 col-mail">{{user.email}}</div>
+				<div class="col-2 col-address">{{ user.address }}</div>
+				<div class="col-1 col-tel">{{ user.phone }}</div>
+				<div class="col-2 col-actions">
+					<a class="show-btn" href="#">
+						<i class="fa-solid fa-eye"></i>
+					</a>
+					<a class="edit-btn" href="{{path('app_user_edit', {'id': user.id } )}}">
+						<i class="fa-solid fa-user-pen"></i>
+					</a>
+					<a class="delete-btn" href="{{path('app_user_delete', {'id': user.id } )}}">
+						<i class="fa-solid fa-trash"></i>
+					</a>
+				</div>
+			</div>
+			<hr>
+		{% endfor %}
+	</main>
+{% endblock %}

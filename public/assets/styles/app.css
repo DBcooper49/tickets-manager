@@ -41,3 +41,49 @@ body{
 footer p{
     margin-top: 1em;
 }
+
+.main-top{
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
+main h3{
+    margin-left: 1em;
+} 
+.add-new{
+    background-color: #FAEE83!important;
+    margin-right: 2em;
+}
+.content{
+    font-weight: bold;
+    margin-bottom: 1em;
+}
+.show-btn i{
+    color: #000000;
+}
+
+.delete-btn i{
+    color: #A0313A;
+}
+
+.edit-btn i{
+   color: #FAEE83;
+}
+
+a{
+    text-decoration: none!important;
+}
+
+.back-btn i{
+    margin-right: 0.5em;
+}
+main{
+    width: 100%;
+}
+form{
+    width: 30%;
+}
+form button{
+    background-color: #FAEE83!important;
+    color: #000000!important;
+    border: 1px #000000 solid!important;
+}
